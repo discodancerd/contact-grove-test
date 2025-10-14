@@ -15,6 +15,16 @@
         @endif
 
         <form wire:submit.prevent="submit" class="space-y-4" enctype="multipart/form-data">
+            <div class="invisible" aria-hidden="true" tabindex="-1">
+                <label for="company">Company</label>
+                <input id="company"
+                       name="company"
+                       type="text"
+                       wire:model.defer="hp"
+                       autocomplete="off"
+                       tabindex="-1">
+            </div>
+            
             <div>
                 <label class="block text-sm font-medium">Name</label>
                 <input type="text" wire:model.live="name" class="mt-1 w-full rounded border p-2">

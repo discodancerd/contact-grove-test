@@ -26,8 +26,15 @@ class ContactForm extends Component
     #[Validate('nullable|file|max:1024|mimes:jpg,jpeg,png,webp')]
     public $attachment;
 
+    public string $hp = '';
+
     public function submit(Request $request)
     {
+        // bot?
+        if (filled($this->hp)) {
+            return;
+        }
+
         $this->validate();
 
         if (RateLimiter::tooManyAttempts('send-message:'.$request->ip(), $perMinute = 10)) {
