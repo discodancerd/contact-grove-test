@@ -8,6 +8,12 @@
             </div>
         @endif
 
+        @if (session('warning'))
+            <div class="mb-4 rounded bg-yellow-100 p-3 text-yellow-800">
+                {{ session('warning') }}
+            </div>
+        @endif
+
         <form wire:submit.prevent="submit" class="space-y-4" enctype="multipart/form-data">
             <div>
                 <label class="block text-sm font-medium">Name</label>
@@ -52,7 +58,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="rounded bg-black px-4 py-2 text-white">Send</button>
+            <button wire:click="submit" wire:loading.attr="disabled" class="rounded bg-black px-4 py-2 text-white">Send</button>
         </form>
     </div>
 </div>

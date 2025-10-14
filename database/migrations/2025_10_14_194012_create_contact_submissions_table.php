@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('ip', length: 46);
             $table->string('ua', length: 2048);
             $table->string('attachment', length: 36)->nullable(); // UUID file name
+            $table->string('hash', length: 32);
+            $table->unique('hash');
             $table->timestamps();
         });
     }

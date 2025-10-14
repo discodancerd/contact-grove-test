@@ -18,13 +18,14 @@ class ContactSubmissionFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'subject' => fake()->sentence(),
-            'message' => fake()->paragraph(),
-            'ip' => Arr::random([fake()->ipv4(), fake()->ipv6()]),
-            'ua' => fake()->userAgent(),
+            'name'       => fake()->name(),
+            'email'      => fake()->unique()->safeEmail(),
+            'subject'    => fake()->sentence(),
+            'message'    => fake()->paragraph(),
+            'ip'         => Arr::random([fake()->ipv4(), fake()->ipv6()]),
+            'ua'         => fake()->userAgent(),
             'attachment' => fake()->uuid(),
+            'hash'       => fake()->sha256(),
         ];
     }
 }

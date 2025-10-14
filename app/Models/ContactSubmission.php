@@ -11,6 +11,6 @@ class ContactSubmission extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','email','subject','message','attachment','ip', 'ua',
+        'name','email','subject','message','attachment','ip', 'ua', 'hash',
     ];
 }

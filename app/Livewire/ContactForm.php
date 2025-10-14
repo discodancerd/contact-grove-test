@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\ContactSubmission;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -27,6 +29,12 @@ class ContactForm extends Component
     public function submit(Request $request)
     {
         $this->validate();
+
+        if (RateLimiter::tooManyAttempts('send-message:'.$request->ip(), $perMinute = 10)) {
+            session()->flash('warning', 'Too many attempts. Please wait before continuing.');
+            return;
+        }
+
         $filename = null;
 
         if ($this->attachment) {
@@ -38,15 +46,33 @@ class ContactForm extends Component
             $storedPath = $this->attachment->storeAs('contact-attachments', $filename);
         }
 
-        ContactSubmission::create([
-            'name'       => $this->name,
-            'email'      => $this->email,
-            'subject'    => $this->subject,
-            'message'    => $this->message,
-            'attachment' => $filename,
-            'ip'         => $request->ip(),
-            'ua'         => $request->userAgent(),
-        ]);
+        // Duplicate prevention
+        $canonEmail   = mb_strtolower(trim($this->email));
+        $canonSubject = preg_replace('/\s+/u',' ', trim($this->subject));
+        $canonMessage = preg_replace("/\s+/u", '', trim($this->message));
+
+        $hash = hash('sha256', $canonEmail.$canonSubject.$canonMessage);
+
+        try {
+            ContactSubmission::create([
+                'name'       => $this->name,
+                'email'      => $this->email,
+                'subject'    => $this->subject,
+                'message'    => $this->message,
+                'attachment' => $filename,
+                'ip'         => $request->ip(),
+                'ua'         => $request->userAgent(),
+                'hash'       => $hash,
+            ]);
+        } catch (QueryException $e) {
+            // SQL duplicate key error code
+            if ($e->getCode() === '23000') {
+                session()->flash('warning', 'The message is already sent.');
+            }
+            return;
+        }
+
+        RateLimiter::increment('send-message:'.$request->ip());
 
         // Queue notification job or put on model create
 
