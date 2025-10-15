@@ -8,6 +8,8 @@ use Illuminate\Database\Seeder;
 
 class ContactSubmissionSeeder extends Seeder
 {
+    use WithoutModelEvents;
+    
     /**
      * Run the database seeds.
      */

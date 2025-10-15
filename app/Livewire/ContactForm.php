@@ -6,6 +6,7 @@ use App\Models\ContactSubmission;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
