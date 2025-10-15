@@ -26,8 +26,7 @@ class ContactSubmission extends Model
                     ->queue(new ContactSubmitted($submission));
             } else {
                 Mail::to(env('NOTIFY_ADDRESS'))
-                    ->send(new ContactSubmitted($submission))
-                    ->afterCommit();
+                    ->send(new ContactSubmitted($submission));
             }
         });
     }
