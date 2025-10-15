@@ -2,6 +2,8 @@
 
 A tiny Laravel app with a Livewire contact form, file upload, spam guards, queued email, and an admin table to browse submissions.
 
+Demo: http://66.29.134.61/
+
 ---
 
 ## Prerequisites
@@ -100,7 +102,7 @@ QUEUE_MAIL=true
 
 ### Mail SMTP
 
-Use **working SMTP** creds (can provide securely those used at upon request). In **.env** set:
+Use **working SMTP** creds (can provide securely those used at http://66.29.134.61/ upon request). In **.env** set:
 
 ```
 MAIL_MAILER=smtp
@@ -134,6 +136,8 @@ php artisan queue:work
 ---
 
 ## 6) Where to find things
+
+Through navigation menu or:
 
 * **Contact form:** `GET /`
 * **Submissions list (admin):** `GET /admin/messages`

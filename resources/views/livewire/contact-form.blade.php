@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <button wire:click.prevent="submit" wire:loading.attr="disabled" class="rounded bg-black px-4 py-2 text-white">Send</button>
+            <button wire:click.prevent="submit" wire:loading.attr="disabled" class="rounded bg-black px-4 py-2 text-white cursor-pointer">Send</button>
         </form>
     </div>
 </div>
