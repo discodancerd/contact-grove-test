@@ -184,4 +184,8 @@ php artisan test
 
 Clone → configure `.env` → install deps → build → migrate/seed → run → (optional) start queue worker → open the routes above.
 
+## Spam mitigation
+
+This app ships with **two invisible protections**: a **honeypot** field and **rate limiting**. The honeypot is a hidden input (e.g., `company`) bound to the Livewire component; real users never see or fill it, but many bots do—if it’s non-empty on submit, the request is silently rejected. Rate limiting uses Laravel’s `RateLimiter` to cap how often a client can submit (we key by IP).
+
 Further considerations: As next steps, set up a lightweight CI/CD pipeline (e.g., GitHub Actions) that runs Pint for style checks, PHPStan with Larastan for static analysis (start with a baseline, then ratchet to level: max), and the test suite against a dedicated testing database; adopt stricter typing across the codebase (declare(strict_types=1);, explicit parameter and return types, DTOs where helpful) and annotate collections so analysis stays precise; add convenient Composer scripts (lint, lint:fix, analyze, test) and optional pre-commit hooks to keep feedback fast locally; finally, make PRs block on green style, analysis, and tests to maintain quality as the project grows.
