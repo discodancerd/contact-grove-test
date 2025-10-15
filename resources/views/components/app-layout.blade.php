@@ -15,7 +15,25 @@
         @livewireStyles
     </head>
     <body class="px-8">
+        <div class="w-full h-16 flex flex-row mx-auto items-center">
+            <a href="{{ route('contact.form') }}"
+               @class([
+                 'px-3 py-2 rounded',
+                 request()->routeIs('contact.form') ? 'bg-gray-900 text-white' : 'text-gray-700 hover:bg-gray-100'
+               ])
+               @if (class_exists(\Livewire\Mechanisms\Navigate\Navigate::class)) wire:navigate @endif
+            >Contact Form</a>
+
+            <a href="{{ route('admin.messages.index') }}"
+               @class([
+                 'px-3 py-2 rounded',
+                 request()->routeIs('admin.messages.index') ? 'bg-gray-900 text-white' : 'text-gray-700 hover:bg-gray-100'
+               ])
+               @if (class_exists(\Livewire\Mechanisms\Navigate\Navigate::class)) wire:navigate @endif
+            >Messages</a>
+        </div>
         {{ $slot ?? '' }}
         @livewireScripts
+        @livewireScriptConfig(['navigate' => true])
     </body>
 </html>

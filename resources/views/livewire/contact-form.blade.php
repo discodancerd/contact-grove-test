@@ -1,5 +1,4 @@
 <div class="p-4">
-
     <div class="max-w-xl mx-auto">
         <p class="text-4xl my-8">{{ $title }}</p>
         @if (session('contact_ok'))
@@ -24,34 +23,34 @@
                        autocomplete="off"
                        tabindex="-1">
             </div>
-            
+
             <div>
-                <label class="block text-sm font-medium">Name</label>
-                <input type="text" wire:model.live="name" class="mt-1 w-full rounded border p-2">
+                <label class="block text-sm font-medium">Name
+                <input type="text" wire:model.live="name" class="mt-1 w-full rounded border p-2"></label>
                 @error('name') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label class="block text-sm font-medium">Email</label>
-                <input type="email" wire:model.live="email" class="mt-1 w-full rounded border p-2">
+                <label class="block text-sm font-medium">Email
+                <input type="email" wire:model.live="email" class="mt-1 w-full rounded border p-2"></label>
                 @error('email') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label class="block text-sm font-medium">Subject</label>
-                <input type="text" wire:model.live="subject" class="mt-1 w-full rounded border p-2">
+                <label class="block text-sm font-medium">Subject
+                <input type="text" wire:model.live="subject" class="mt-1 w-full rounded border p-2"></label>
                 @error('subject') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label class="block text-sm font-medium">Message</label>
-                <textarea rows="6" wire:model.live="message" class="mt-1 w-full rounded border p-2"></textarea>
+                <label class="block text-sm font-medium">Message
+                <textarea rows="6" wire:model.live="message" class="mt-1 w-full rounded border p-2"></textarea></label>
                 @error('message') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label class="block text-sm font-medium">Attachment (optional)</label>
-                <input type="file" wire:model="attachment" class="mt-1 w-full rounded border p-2">
+                <label class="block text-sm font-medium">Attachment (optional)
+                <input type="file" wire:model="attachment" class="mt-1 w-full rounded border p-2"></label>
                 @error('attachment') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
 
                 <div x-data="{ isUploading: false, progress: 0 }"
