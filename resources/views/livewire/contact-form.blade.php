@@ -14,6 +14,7 @@
         @endif
 
         <form wire:submit.prevent="submit" class="space-y-4" enctype="multipart/form-data">
+            @csrf
             <div class="invisible" aria-hidden="true" tabindex="-1">
                 <label for="company">Company</label>
                 <input id="company"
@@ -67,7 +68,7 @@
                 </div>
             </div>
 
-            <button wire:click="submit" wire:loading.attr="disabled" class="rounded bg-black px-4 py-2 text-white">Send</button>
+            <button wire:click.prevent="submit" wire:loading.attr="disabled" class="rounded bg-black px-4 py-2 text-white">Send</button>
         </form>
     </div>
 </div>

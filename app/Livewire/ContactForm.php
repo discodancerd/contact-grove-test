@@ -85,7 +85,7 @@ class ContactForm extends Component
         // Queue notification job or put on model create
 
         // Reset form (keep no attachment)
-        $this->reset(['name','email','subject','message','attachment']);
+        $this->reset(['name', 'email', 'subject', 'message', 'attachment']);
 
         // Flash UI feedback
         session()->flash('contact_ok', 'Thanks! Your message has been sent.');
